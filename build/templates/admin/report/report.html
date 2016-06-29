@@ -1,0 +1,117 @@
+<!-- START CUSTOM TABS --><div class="row"><div class="col-md-12"><!-- Custom Tabs --><div class="nav-tabs-custom"><ul class="nav nav-tabs"><li class="active"><a href="#{{getContextPath()}}#designer" data-toggle="tab">Designer</a></li><li><a href="#{{getContextPath()}}#preview" data-toggle="tab">Preview</a></li><li><a href="#{{getContextPath()}}#schedule" data-toggle="tab">Schedule</a></li><li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#{{getContextPath()}}">Settings <span class="caret"></span></a><ul class="dropdown-menu"><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Permission</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li></ul></li><li class="pull-right"><div class="box-tools pull-right"><button class="btn btn-box-tool" data-widget="remove" ng-click="closeTemplate()"><i class="fa fa-times"></i></button></div></li></ul><div class="tab-content"><div class="tab-pane active" id="designer"><div template-layout></div></div><!-- /.tab-pane --><div class="tab-pane" id="preview"><div class="report-pane"><button type="button" class="btn btn-default" ng-click="generateReport('html', '#framePreview')"><i class="fa fa-eye" aria-hidden="true"></i></button> <button type="button" class="btn btn-default" ng-click="generateReport('pdf')">PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i></button> <button type="button" class="btn btn-default" ng-click="generateReport('xlsx')">XLSX <i class="fa fa-file-excel-o" aria-hidden="true"></i></button></div></div><!-- /.tab-pane --><div class="tab-pane" id="schedule"><div ng-controller="ScheduleCtrl"><div><!-- new schedule form --><div ng-if="openNewSchedule" class="row" style="margin-top: 10px"><div ng-include="'scheduleForm.html'"></div></div><div class="box-body" ng-if="!openNewSchedule"><button type="button" class="btn btn-primary btn-sm" style="margin-bottom: 5px" ng-click="openSchedule()"><i class="fa fa-plus-square" aria-hidden="true"></i> Add</button><table class="table table-bordered table-hover"><thead><tr><th>Name</th><th>Start Date</th><th>Cron Type</th><th>Cron Time</th><th></th></tr></thead><tbody><tr ng-repeat="schedule in schedules"><td>{{schedule.name}}</td><td>{{schedule.startAt}}</td><td>{{schedule.cron.type}}<ul><li ng-repeat="day in schedule.cron.weekDays">{{day}}</li></ul></td><td><span>{{schedule.cron.time.hour}}</span>: <span>{{schedule.cron.time.minute}}</span></td><td><button type="button" class="btn btn-primary btn-sm" style="margin-top:10px" ng-click="editSchedule(schedule)">Edit</button></td></tr></tbody></table></div></div></div></div><!-- /.tab-pane --><div class="tab-pane" id="settings"><div class="report-pane"></div></div><!-- /.tab-content --></div><!-- nav-tabs-custom --></div><!-- /.col --><!-- schedule form --><script type="text/ng-template" id="scheduleForm.html"><div class="scheduleFormContainer">
+            <form role="form" data-toggle="validator">
+              <div class="row">
+               <div class="col-md-6">
+                <div class="form-group">
+                  <label for="scheduleName">Schedule name</label>
+                  <input type="text" class="form-control" id="scheduleName" ng-model="schedule.name" required>
+                </div>
+             
+           
+                <div class="radio">
+                      <label>
+                        <input type="radio"  ng-model="schedule.status" value="ENABLE" checked>
+                           Enable
+                         </label>
+                 </div>
+                 <div class="radio">
+                      <label>
+                        <input type="radio"    ng-model="schedule.status" value="DISABLE">
+                        Disable
+                      </label>
+                 </div>
+                   
+                 <div  class="form-group" ng-controller="DatePickerCtrl">
+                    <div class="row">
+                         <div class="col-md-7">
+                            <label for="startAt">Start Date</label>
+                            <div class="input-group">
+                              <input type="text" id="startAt" class="form-control" uib-datepicker-popup ng-model="dt" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                              <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                              </span>
+                             </div>
+                          </div>
+                          <div class="col-md-5">
+                            <label for="timezone">Time Zone</label>
+                             <select class="form-control" id="timezone"  ng-model="schedule.cron.timezone"  
+                                 ng-options="tz for tz in timezones">
+                             </select>
+                          </div>
+                     </div>
+                  </div>
+                      
+                  <div ng-controller="TimePickerCtrl">
+                    <div>
+                       <label for="cronTime">Cron Time</label>
+                           <uib-timepicker  id="cronTime" ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
+                     </div>
+                  </div>
+          
+                 <div style="padding-left:20px">
+                     <label class="checkbox" for="repeatSchedule">
+                         <input type="checkbox" id="repeatSchedule" ng-model="schedule.cron.repeat"> Repeat
+                      </label>
+                  </div>
+                  
+                  <div>    
+                       <label class="radio-inline">
+                         <input type="radio" ng-model="schedule.cron.type" value="DAILY" checked> Daily
+                       </label>
+                       <label class="radio-inline">
+                         <input type="radio" ng-model="schedule.cron.type"  value="WEEKDAY"> Weekdays
+                       </label>
+                       <label class="radio-inline">
+                         <input type="radio" ng-model="schedule.cron.type" value="MONTHLY"> Monthly
+                       </label>
+                   </div>
+
+                    <div style="padding-left:20px" class="form-group" ng-if="schedule.cron.type =='WEEKDAY'">
+                        <div class="checkbox" ng-repeat="day in weekDays">
+                          <input type="checkbox" ng-model="day.isSelected" /> {{day.name}}
+                       </div>
+                   </div>           
+                  </div>
+            
+                  <div class="col-md-5">
+                      <div class="form-inline">
+                            <div>
+                             Recipients   
+                            </div>
+                             <table class="table table-condensed">
+                                <thead>
+                                  <tr > 
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>
+                                      <button type="button" class="btn btn-info btn-xs" ng-click="addScheduleRecipient(schedule)">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                      </button>
+                                    </th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                   <tr ng-repeat="rc in schedule.recipients track by $index">
+                                     <td>
+                                        <input type="text" class="form-control" ng-model="rc.name" required>
+                                     </td>
+                                     <td>
+                                        <input type="text" class="form-control" ng-model="rc.email" required>
+                                     </td>
+                                      <td>
+                                         <button type="button" class="btn btn-default btn-xs" ng-click="deleteScheduleRecipient(schedule,$index)">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                         </button>
+                                      </td>
+                                   </tr>
+                                </tbody>
+                             </table>
+                       </div>
+                  </div>
+                </div>
+                <div>
+                  <button type="submit" class="btn btn-primary btn-sm" style="margin-top:10px" ng-click="saveSchedule()">Save</button>
+                  <button type="button" class="btn btn-primary btn-sm" style="margin-top:10px" ng-click="cancelSchedule()">Cancel</button>
+               </div>
+            </form> 
+          </div></script></div></div>

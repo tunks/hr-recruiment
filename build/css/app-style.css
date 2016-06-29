@@ -1,0 +1,54 @@
+/* 
+    Custom styles
+    Created on : Apr 25, 2016, 2:40:35 PM
+    Author     : ebrimatunkara
+*/
+
+/**
+ * model widget styles
+ **/
+
+.schema-container{
+
+}
+
+.schema-container .panel{
+  margin-bottom: 0px;
+}
+
+.schema-container .table{
+    margin-bottom: 10px;
+    font-size: 85%;
+    background: #fff;
+}
+
+.schema-container .table > thead > tr > th{
+  border-bottom: 0px;    
+}
+
+.schema-container .table > thead > tr > th, 
+.schema-container .table > tbody > tr > th, 
+.schema-container .table > tfoot > tr > th, 
+.schema-container .table > thead > tr > td, 
+.schema-container .table > tbody > tr > td, 
+.schema-container .table > tfoot > tr > td
+{
+    padding-bottom: 0px;
+}
+
+.schema-container .table-container{
+    padding-left: 15px;
+}
+
+.schema-container .list-group-item{
+    padding-bottom: 0px;
+}
+
+.schema-container .no-schema-field{
+    background: #fff;
+}
+
+/** --------------- animations ------------- **/
+/*** page template ***/
+.page-template.ng-leave      { transform-origin: 50% 50%; animation: rotateOutNewspaper .5s both ease-in; }
+.page-template.ng-enter      { animation:slideInUp 0.5s both ease-in; }

@@ -1,0 +1,31 @@
+{
+    "name": "report-dashboard",
+    "version": "1.0.0",
+    "main": "path/to/main.css",
+    "ignore": [
+        ".jshintrc",
+        "**/*.txt"
+    ],
+    "dependencies": {
+        "jquery": "*",
+        "jquery-ui": "*",
+        "angular": "~1.5.5",
+        "angular-dragdrop": "*",
+        "bootstrap": "*",
+        "angular-bootstrap": "*",
+        "Chart.js": "*",
+        "angular-ui-grid": "^3.1.1",
+        "angular-ui-router": "*",
+        "angular-tree-dnd": "^3.0.4",
+        "angular-animate": "*",
+        "angular-breadcrumb": "*",
+        "moment": "*",
+        "moment-timezone": "*",
+        "checklist-model": "*"
+    },
+    "resolutions": {
+       "angular": "~1.5.5"
+    },
+    "devDependencies": {
+    }
+}

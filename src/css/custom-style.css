@@ -1,0 +1,72 @@
+/* 
+    Custom styles
+    Created on : Apr 25, 2016, 2:40:35 PM
+    Author     : ebrimatunkara
+*/
+
+.content-wrapper, .right-side, .main-footer{
+    margin-left:0px;
+}
+
+
+.content-banner:before{
+    background: rgba(0, 0, 0, 0.4) none repeat scroll 0 0;
+    content: " ";
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.content-banner {
+    background-image: url('../img/job-banner-3.png');
+    background-position:bottom center;
+    height: 250px;
+}
+
+
+.content-banner .banner-form-container{
+    bottom: 10px;
+    left: 0;
+    position: absolute;
+    right: 0; 
+}
+
+.content-header{
+    padding:0px;
+}
+
+.btn-u {
+    background: #3498db none repeat scroll 0 0;
+}
+.btn-u-lg, a.btn-u-lg {
+    font-size: 18px;
+    padding: 10px 25px;
+}
+.btn-u {
+    background: #72c02c none repeat scroll 0 0;
+    border: 0 none;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 6px 13px;
+    position: relative;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.main-header .logo{
+    width: auto;
+}
+
+.main-header > .navbar{
+   margin-left: 0px; 
+}
+
+.skin-blue-light .content-wrapper, .skin-blue-light .main-footer {
+    border: none;
+}
+

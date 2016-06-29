@@ -1,0 +1,82 @@
+<!-- editable table--><div class="template-table-container" dnd-droppable style="height:400px"><table ng-repeat="component in components" class="table table-condensed table-bordered component-table"><tr><td ng-repeat="field in component.fieldComponents track by $index" ng-include="componentFieldView(field)"></td></tr></table><script type="text/ng-template" id="view-field-component.html"><div  class="field-label" style="width:100%">{{field.name}}</div>       
+       <div>
+           <div style="float:right">
+            <button type="button" class="btn btn-default btn-xs" ng-click="editComponentField(field)">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+            </button>
+           <button type="button" class="btn btn-default btn-xs" ng-click="deleteComponentField(component,field,$index)">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </button>
+             <div>
+       </div></script><script type="text/ng-template" id="edit-field-component.html"><div class="edit-field-container">
+           <div>
+              <table>
+                  <thead>
+                    <th>Model</th>
+                    <th>Field</th>
+                    <th>Type</th>
+                    <th>Label</th>
+                  </thead>
+                  <tbody>
+                    <tr>
+                       <td>
+                          <input type="text" class="form-control" id="field_name" ng-model="field.modelName" readonly>
+                       </td>
+                       <td>
+                          <input type="text" class="form-control" id="field_name" ng-model="field.name" readonly>
+                       </td>
+                       <td>
+                           <input type="text" class="form-control" id="field_type" ng-model="field.fieldType" readonly>
+                       </td>
+                       <td>
+                          <input type="text" class="form-control" id="field_label" ng-model="field.label" value="componentFieldLabel(field)">
+                       </td>
+                    </tr>
+                  </tbody>
+               </table>
+               <div>
+                    <div class="radio">
+                         <label>
+                           <input type="radio" ng-model="field.visible" ng-value="true">
+                              Visible
+                           </label>
+                    </div>
+                    <div class="radio">
+                         <label>
+                           <input type="radio" ng-model="field.visible" ng-value="false">
+                              Hide
+                         </label>
+                    </div>
+               </div>
+           </div>
+         
+          <fieldset>
+            <legend>Field Arguments
+               <button type="button" class="btn btn-default btn-xs" ng-click="addComponentFieldArgument(field)">
+                   <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+               </button>
+            </legend>
+    
+            <table class="table">
+               <thead>
+                 <th>Value Type</th>
+                 <th>Operator</th>
+                 <th>Value</th>
+                 <th></th>
+               </thead>
+               <tbody>
+                  <tr ng-repeat="item in field.fieldArguments track by $index" report-field-argument>
+                  </tr>
+              </tbody>
+             </table>
+          </fieldset>
+          <div>
+             <button type="button" class="btn btn-primary btn-xs" ng-click="saveComponentField(component,field)">
+                  Save
+             </button>
+
+             <button type="button" class="btn btn-primary btn-xs" ng-click="closeEditComponentField(field)">
+                   Close
+             </button>
+          </div>
+       </div></script></div>

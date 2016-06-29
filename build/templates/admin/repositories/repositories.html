@@ -1,0 +1,15 @@
+<div class="row repo-container" ng-controller="RepositoryCtrl"><div class="col-md-12 col-sm-12 margin-bottom-30"><div class="margin-bottom-30"><div class="row"><div class="col-md-12"><button style="margin-bottom:5px" class="btn btn-primary btn-sm" uib-popover-template="templatePopover.templateUrl" popover-title="Add Report Repository" popover-placement="bottom" popover-trigger="outsideClick"><i class="glyphicon glyphicon-plus"></i><span>New</span></button></div></div></div><tree-dnd tree-data="repositories" tree-control="tree_api" primary-key="id" parent-key="parentId" column-defs="col_defs" expand-on="expanding_property" icon-expand="glyphicon glyphicon-folder-open" icon-collapse="glyphicon glyphicon-folder-close"></tree-dnd></div></div><!-- popup to create report repositrory and template --><script type="text/ng-template" id="myPopoverTemplate.html"><div class="form-group">
+    <form>
+    <div class="form-group">
+    <label for="templateName">Name</label>
+    <input type="text" class="form-control" id="templateName" placeholder="Name" ng-model="templatePopover.model.name">
+    </div>
+    <div class="form-group">
+    <label for="description">Description</label>
+    <textarea class="form-control" rows="3" id="description" placeholder="Description" ng-model="templatePopover.model.description"></textarea>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary" ng-click="saveItem()">Save</button>
+    </form>
+    </div></script>
